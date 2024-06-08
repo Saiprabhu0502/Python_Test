@@ -1,0 +1,447 @@
+1. Write a function `is_prime(n: int) -> bool` that checks if a given number is prime.
+Ans:
+      def is_prime(n: int) -> bool:
+          if n <= 1:
+              return False
+          for i in range(2, int(n**0.5) + 1):
+              if n % i == 0:
+                  return False
+          return True
+
+2.Write a Python function `reverse_string(s: str) -> str` that takes a string and returns its reverse.
+Ans: 
+      def reverse_string(s: str) -> str:
+          return s[::-1]
+
+
+3.Given a list of integers, write a function `sum_of_squares(lst: List[int]) -> int` that returns the sum of the squares of the elements.
+Ans: 
+      def sum_of_squares(lst: List[int]) -> int:
+          return sum(x ** 2 for x in lst)
+
+4.Write a Python program to count the frequency of each character in a given string and return a dictionary with characters as keys and their frequencies as values.
+Ans:
+      def char_frequency(s: str) -> dict:
+          freq = {}
+          for char in s:
+              if char in freq:
+                  freq[char] += 1
+              else:
+                  freq[char] = 1
+          return freq
+
+
+5.Django Basics
+Write a simple Django view function `hello_world` that returns an HTTP response with the text "Hello, World!".
+Ans:
+      from django.http import HttpResponse
+      
+      def hello_world(request):
+          return HttpResponse("Hello, World!")
+
+6.Flask Basics
+Write a basic Flask application with a single route `/` that returns the text "Welcome to Flask!".
+Ans:  
+      from flask import Flask
+      
+      app = Flask(__name__)
+      
+      @app.route('/')
+      def home():
+          return "Welcome to Flask!"
+      
+      if __name__ == '__main__':
+          app.run(debug=True)
+
+7.HTML and CSS
+Create a simple HTML page with a header that says "Welcome to My Website" and a paragraph of lorem ipsum text. Add some basic CSS to style the header with a blue color and center alignment.
+Ans:
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <style>
+                h1 {
+                    color: blue;
+                    text-align: center;
+                }
+            </style>
+        </head>
+        <body>
+            <h1>Welcome to My Website</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+        </body>
+        </html>
+
+
+8.JavaScript Basics
+Write a JavaScript function `showAlert()` that displays an alert with the message "Hello, this is a JavaScript alert!".
+Ans:
+      function showAlert() {
+          alert("Hello, this is a JavaScript alert!");
+      }
+
+
+9.SQL Basics
+Write a SQL query to create a table `students` with columns `id`, `name`, and `grade`.
+Ans:
+      SQL>CREATE TABLE students (
+          id INTEGER PRIMARY KEY,
+          name TEXT,
+          grade REAL
+      );
+
+
+10.Basic Database Operations
+Write a Python function `insert_student(name: str, grade: float)` that inserts a new student into the `students` table using SQLite.
+Ans: 
+      import sqlite3
+      
+      def insert_student(name: str, grade: float):
+          conn = sqlite3.connect('students.db')
+          cursor = conn.cursor()
+          cursor.execute('INSERT INTO students (name, grade) VALUES (?, ?)', (name, grade))
+          conn.commit()
+          conn.close()
+
+11.REST API Basics
+Write a simple REST API using Flask with one endpoint /greet/<name> that returns a JSON response with a greeting message, e.g., `{"message": "Hello, <name>!"}`.
+Ans:
+      from flask import Flask, jsonify
+      
+      app = Flask(__name__)
+      
+      @app.route('/greet/<name>')
+      def greet(name):
+          return jsonify({"message": f"Hello, {name}!"})
+      
+      if __name__ == '__main__':
+          app.run(debug=True)
+
+12.Write a function `merge_sort(arr: List[int]) -> List[int]` that implements the merge sort algorithm.
+Ans:
+      def merge_sort(arr: List[int]) -> List[int]:
+          if len(arr) <= 1:
+              return arr
+          mid = len(arr) // 2
+          left = merge_sort(arr[:mid])
+          right = merge_sort(arr[mid:])
+          return merge(left, right)
+      
+      def merge(left: List[int], right: List[int]) -> List[int]:
+          result = []
+          i = j = 0
+          while i < left.length and j < right.length:
+              if left[i] < right[j]:
+                  result.append(left[i])
+                  i += 1
+              else:
+                  result.append(right[j])
+                  j += 1
+          result.extend(left[i:])
+          result.extend(right[j:])
+          return result
+
+13.Implement a function `find_duplicates(arr: List[int]) -> List[int]` that returns a list ofduplicate elements in the input list.
+Ans:
+
+      def find_duplicates(arr: List[int]) -> List[int]:
+          seen = set()
+          duplicates = set()
+          for num in arr:
+              if num in seen:
+                  duplicates.add(num)
+              else:
+                  seen.add(num)
+          return list(duplicates)
+
+14.Write a function `is_palindrome(s: str) -> bool` to check if a given string is a palindrome (reads the same forward and backward).
+Ans: 
+      def is_palindrome(s: str) -> bool:
+          return s == s[::-1]
+
+
+15.Sorting
+Implement the quicksort algorithm in Python.
+Ans:
+      def quicksort(arr: List[int]) -> List[int]:
+          if len(arr) <= 1:
+              return arr
+          pivot = arr[len(arr) // 2]
+          left = [x for x in arr if x < pivot]
+          middle = [x for x in arr if x == pivot]
+          right = [x for x in arr if x > pivot]
+          return quicksort(left) + middle + quicksort(right)
+
+16.Binary Search Tree (BST)
+Write a class `BST` with methods to insert, find, and delete nodes in a binary search tree. Also, include a method to find the height of the tree.
+Ans:
+      class Node:
+          def __init__(self, key):
+              self.left = None
+              self.right = None
+              self.val = key
+      
+      class BST:
+          def __init__(self):
+              self.root = None
+      
+          def insert(self, key):
+              if self.root is None:
+                  self.root = Node(key)
+              else:
+                  self._insert(self.root, key)
+      
+          def _insert(self, root, key):
+              if key < root.val:
+                  if root.left is None:
+                      root.left = Node(key)
+                  else:
+                      self._insert(root.left, key)
+              else:
+                  if root.right is None:
+                      root.right = Node(key)
+                  else:
+                      self._insert(root.right, key)
+      
+          def find(self, key):
+              return self._find(self.root, key)
+      
+          def _find(self, root, key):
+              if root is None or root.val == key:
+                  return root
+              if key < root.val:
+                  return self._find(root.left, key)
+              return self._find(root.right, key)
+      
+          def delete(self, key):
+              self.root = self._delete(self.root, key)
+      
+          def _delete(self, root, key):
+              if root is None:
+                  return root
+              if key < root.val:
+                  root.left = self._delete(root.left, key)
+              elif key > root.val:
+                  root.right = self._delete(root.right, key)
+              else:
+                  if root.left is None:
+                      return root.right
+                  elif root.right is None:
+                      return root.left
+                  temp = self._minValueNode(root.right)
+                  root.val = temp.val
+                  root.right = self._delete(root.right, temp.val)
+              return root
+      
+          def _minValueNode(self, node):
+              current = node
+              while current.left is not None:
+                  current = current.left
+              return current
+      
+          def height(self):
+              return self._height(self.root)
+      
+          def _height(self, root):
+              if root is None:
+                  return 0
+              else:
+                  left_height = self._height(root.left)
+                  right_height = self._height(root.right)
+                  return max(left_height, right_height) + 1
+
+
+17.Graph Algorithms
+Write a function `dijkstra(graph: Dict[str, Dict[str, int]], start: str) -> Dict[str, int]` thatimplements Dijkstra's algorithm to find the shortest path from the start node to all other
+nodes in a weighted graph represented as an adjacency list.
+Ans:
+        import heapq
+        
+        def dijkstra(graph: Dict[str, Dict[str, int]], start: str) -> Dict[str, int]:
+            distances = {node: float('infinity') for node in graph}
+            distances[start] = 0
+            priority_queue = [(0, start)]
+        
+            while priority_queue:
+                current_distance, current_node = heapq.heappop(priority_queue)
+        
+                if current_distance > distances[current_node]:
+                    continue
+        
+                for neighbor, weight in graph[current_node].items():
+                    distance = current_distance + weight
+        
+                    if distance < distances[neighbor]:
+                        distances[neighbor] = distance
+                        heapq.heappush(priority_queue, (distance, neighbor))
+        
+            return distances
+
+
+18. Create a class Book with the following attributes and methods:
+*Attributes: `title`, `author`, `pages`
+*Methods:
+*`__init__(self, title: str, author: str, pages: int)`: Constructor to initialize the attributes.
+*`__str__(self) -> str`: Method to return a string representation of the book.
+
+Ans:
+
+      class Book:
+          def __init__(self, title: str, author: str, pages: int):
+              self.title = title
+              self.author = author
+              self.pages = pages
+      
+          def __str__(self) -> str:
+              return f"'{self.title}' by {self.author}, {self.pages} pages"
+
+
+19. Create a class `Rectangle` with the following attributes and methods:
+*Attributes: length, width
+*Methods:
+*`__init__(self, length: float, width: float)`: Constructor to initialize the attributes.
+*`area(self) -> float`: Method to calculate the area of the rectangle.
+*`perimeter(self) -> float`: Method to calculate the perimeter of the rectangle.
+
+Ans:
+      class Rectangle:
+          def __init__(self, length: float, width: float):
+              self.length = length
+              self.width = width
+      
+          def area(self) -> float:
+              return self.length * self.width
+      
+          def perimeter(self) -> float:
+              return 2 * (self.length + self.width)
+      
+20. Write a class `BankAccount` with the following:
+*Attributes: account_number, account_holder, balance
+*Methods:
+*`__init__(self, account_number: str, account_holder: str, balance: float = 0.0)`:
+Constructor to initialize the attributes.
+*`deposit(self, amount: float) -> None`: Method to deposit money into the account.
+*`withdraw(self, amount: float) -> bool`: Method to withdraw money from the account. It
+should return True if the withdrawal was successful, and False if there were insufficient
+funds.
+*`get_balance(self) -> float`: Method to return the current balance.
+
+Ans:
+
+      class BankAccount:
+          def __init__(self, account_number: str, account_holder: str, balance: float = 0.0):
+              self.account_number = account_number
+              self.account_holder = account_holder
+              self.balance = balance
+      
+          def deposit(self, amount: float) -> None:
+              self.balance += amount
+      
+          def withdraw(self, amount: float) -> bool:
+              if amount <= self.balance:
+                  self.balance -= amount
+                  return True
+              else:
+                  return False
+      
+          def get_balance(self) -> float:
+              return self.balance
+
+21. Inheritance and Polymorphism
+Create a class hierarchy for `Shape`, `Circle`, and `Rectangle`. The base class Shape
+should have methods to calculate area and perimeter, which are overridden in the derived
+classes `Circle` and `Rectangle`.
+
+Ans:
+      class Shape:
+          def area(self):
+              raise NotImplementedError("Subclasses must implement this method")
+      
+          def perimeter(self):
+              raise NotImplementedError("Subclasses must implement this method")
+      
+      class Circle(Shape):
+          def __init__(self, radius: float):
+              self.radius = radius
+      
+          def area(self):
+              return 3.14159 * self.radius ** 2
+      
+          def perimeter(self):
+              return 2 * 3.14159 * self.radius
+      
+      class Rectangle(Shape):
+          def __init__(self, length: float, width: float):
+              self.length = length
+              self.width = width
+      
+          def area(self):
+              return self.length * self.width
+      
+          def perimeter(self):
+              return 2 * (self.length + self.width)
+
+
+22. Class Methods and Static Methods
+
+Write a class `Employee` with class methods to keep track of the number of employees
+and static methods to validate employee ID format (e.g., must be a string of digits).
+
+Ans:
+
+      class Employee:
+          num_employees = 0
+      
+          def __init__(self, employee_id: str):
+              self.employee_id = employee_id
+              Employee.num_employees += 1
+      
+          
+          def get_num_employees(cls):
+              return cls.num_employees
+      
+          
+          def validate_employee_id(employee_id: str) -> bool:
+              return employee_id.isdigit()
+
+23.Write a function `read_file(file_path: str) -> List[str]` that reads a text file and returns a
+list of strings, each representing a line in the file.
+Ans:
+
+      def read_file(file_path: str) -> List[str]:
+          with open(file_path, 'r') as file:
+              return file.readlines()
+
+24. Write a function `write_file(file_path: str, lines: List[str]) -> None` that writes a list of
+strings to a text file, each string on a new line.
+Ans:
+      def write_file(file_path: str, lines: List[str]) -> None:
+          with open(file_path, 'w') as file:
+              for line in lines:
+                  file.write(f"{line}\n")
+
+25.CSV File Handling
+Write a function `read_csv(file_path: str) -> List[Dict[str, str]]` that reads a CSV file and
+returns a list of dictionaries, each representing a row in the CSV file.
+
+Ans:
+      import csv
+      
+      def read_csv(file_path: str) -> List[Dict[str, str]]:
+          with open(file_path, mode='r') as file:
+              csv_reader = csv.DictReader(file)
+              return [row for row in csv_reader]
+
+26.JSON Data Processing
+Write a function `process_json(file_path: str) -> Dict` that reads a JSON file, processes the
+data (e.g., extracts specific fields), and returns a dictionary with the processed data.
+Ans:
+      import json
+      
+      def process_json(file_path: str) -> Dict:
+          with open(file_path, 'r') as file:
+              data = json.load(file)
+          processed_data = {key: value for key, value in data.items() if key in ['specific_field_1', 'specific_field_2']}
+          return processed_data
+
